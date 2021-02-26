@@ -1,0 +1,3 @@
+rootProject.name = "PlaygroundKt"
+include ':app'
+include ':jetpackmvvm'
