@@ -1,4 +1,4 @@
-package com.example.playgroundkt
+package com.example.playgroundkt.data
 
 /**
  *

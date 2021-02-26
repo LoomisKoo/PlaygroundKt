@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jetpackmvvm.network.manager.NetState
 import com.example.playgroundkt.RouterPath
-import com.example.playgroundkt.HomePageData
+import com.example.playgroundkt.data.HomePageData
 import com.example.playgroundkt.R
 import com.example.playgroundkt.adapter.HomePageAdapter
 import com.example.playgroundkt.base.BaseActivity

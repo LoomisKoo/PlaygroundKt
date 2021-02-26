@@ -2,7 +2,7 @@ package com.example.playgroundkt.adapter
 
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.example.playgroundkt.HomePageData
+import com.example.playgroundkt.data.HomePageData
 import com.example.playgroundkt.R
 import com.example.playgroundkt.base.DataBindingVH
 import com.example.playgroundkt.databinding.ItemHomePageBinding
