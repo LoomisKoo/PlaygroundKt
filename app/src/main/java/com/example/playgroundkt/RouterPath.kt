@@ -17,5 +17,9 @@ class RouterPath {
     companion object {
         // 常量命名与页面一致，方便开发
         const val FloatWindowsActivity = "/function/FloatWindowsActivity"
+        const val LaunchTypeActivity = "/function/LaunchTypeActivity"
+        const val AsyncActivity = "/function/AsyncActivity"
+        const val KotlinActivity = "/function/KotlinActivity"
+        const val FlowActivity = "/function/FlowActivity"
     }
 }

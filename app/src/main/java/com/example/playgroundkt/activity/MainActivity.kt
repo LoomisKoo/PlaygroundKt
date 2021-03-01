@@ -48,9 +48,9 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     override fun onNetworkStateChanged(netState: NetState) {
         super.onNetworkStateChanged(netState)
         if (netState.isSuccess) {
-            Toast.makeText(applicationContext, "我特么终于有网了啊!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "有网了!", Toast.LENGTH_SHORT).show()
         } else {
-            Toast.makeText(applicationContext, "我特么怎么断网了!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "断网了!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -63,6 +63,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     private fun initRecyclerView() {
         val entranceList = ArrayList<HomePageData>()
         entranceList.add(HomePageData("浮窗功能",RouterPath.FloatWindowsActivity))
+        entranceList.add(HomePageData("kotlin",RouterPath.KotlinActivity))
 
         val adapter = HomePageAdapter()
         adapter.setNewInstance(entranceList)

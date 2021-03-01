@@ -3,7 +3,7 @@
     package="com.example.playgroundkt">
     <!-- 悬浮窗权限 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
 
     <application
         android:name=".App"
@@ -13,7 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlaygroundKt">
-        <activity android:name=".activity.FloatWindowsActivity"></activity>
+        <activity android:name=".activity.kotlin.coroutine.FlowActivity"></activity>
+        <activity android:name=".activity.kotlin.coroutine.KotlinActivity" />
+        <activity android:name=".activity.kotlin.coroutine.AsyncActivity" />
+        <activity android:name=".activity.FloatWindowsActivity" />
+        <activity android:name=".activity.kotlin.coroutine.LaunchTypeActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,6 +1,7 @@
 package com.example.jetpackmvvm.base.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.jetpackmvvm.callback.livedata.event.EventLiveData
 
 /**
@@ -21,5 +22,4 @@ open class BaseViewModel : ViewModel() {
         //隐藏
         val dismissDialog by lazy { EventLiveData<Boolean>() }
     }
-
 }
