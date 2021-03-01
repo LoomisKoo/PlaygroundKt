@@ -1,4 +1,4 @@
-package com.example.playgroundkt.activity.kotlin.coroutine
+package com.example.playgroundkt.activity.kotlin
 
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope

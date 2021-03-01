@@ -1,4 +1,4 @@
-package com.example.playgroundkt.activity.kotlin.coroutine
+package com.example.playgroundkt.activity.kotlin
 
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
