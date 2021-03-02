@@ -65,6 +65,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         entranceList.add(HomePageData("浮窗功能",RouterPath.FloatWindowsActivity))
         entranceList.add(HomePageData("kotlin",RouterPath.KotlinActivity))
         entranceList.add(HomePageData("SP ANR",RouterPath.SharePreferenceANRActivity))
+        entranceList.add(HomePageData("Results API",RouterPath.ResultFirstActivity))
 
         val adapter = HomePageAdapter()
         adapter.setNewInstance(entranceList)

@@ -22,5 +22,8 @@ class RouterPath {
         const val KotlinActivity = "/function/KotlinActivity"
         const val FlowActivity = "/function/FlowActivity"
         const val SharePreferenceANRActivity = "/function/SharePreferenceANRActivity"
+        const val ResultFirstActivity = "/function/ResultFirstActivity"
+        const val RoomActivity = "/function/RoomActivity"
+        const val ResultSecondActivity = "/function/ResultSecondActivity"
     }
 }

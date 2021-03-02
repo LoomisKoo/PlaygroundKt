@@ -13,8 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlaygroundKt">
-        <activity android:name=".activity.SharePreferenceANRActivity"></activity>
-        <activity android:name=".activity.kotlin.FlowActivity"></activity>
+        <activity android:name=".activity.jetpack.RoomActivity"></activity>
+        <activity android:name=".activity.jetpack.resultAPI.ResultFirstActivity" />
+        <activity android:name=".activity.jetpack.resultAPI.ResultSecondActivity" />
+        <activity android:name=".activity.SharePreferenceANRActivity" />
+        <activity android:name=".activity.kotlin.FlowActivity" />
         <activity android:name=".activity.kotlin.KotlinActivity" />
         <activity android:name=".activity.kotlin.coroutine.AsyncActivity" />
         <activity android:name=".activity.FloatWindowsActivity" />
