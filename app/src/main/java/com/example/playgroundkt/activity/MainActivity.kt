@@ -1,10 +1,17 @@
 package com.example.playgroundkt.activity
 
+import android.content.Intent
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Icon
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.jetpackmvvm.network.manager.NetState
@@ -16,6 +23,8 @@ import com.example.playgroundkt.base.BaseActivity
 import com.example.playgroundkt.databinding.ActivityMainBinding
 import com.example.playgroundkt.viewmodel.state.MainViewModel
 import me.hgj.jetpackmvvm.demo.app.util.StatusBarUtil
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
@@ -62,10 +71,11 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     private fun initRecyclerView() {
         val entranceList = ArrayList<HomePageData>()
-        entranceList.add(HomePageData("浮窗功能",RouterPath.FloatWindowsActivity))
-        entranceList.add(HomePageData("kotlin",RouterPath.KotlinActivity))
-        entranceList.add(HomePageData("SP ANR",RouterPath.SharePreferenceANRActivity))
-        entranceList.add(HomePageData("Results API",RouterPath.ResultFirstActivity))
+        entranceList.add(HomePageData("浮窗功能", RouterPath.FloatWindowsActivity))
+        entranceList.add(HomePageData("kotlin", RouterPath.KotlinActivity))
+        entranceList.add(HomePageData("SP ANR", RouterPath.SharePreferenceANRActivity))
+        entranceList.add(HomePageData("Results API", RouterPath.ResultFirstActivity))
+        entranceList.add(HomePageData("Shortcuts", RouterPath.ShortcutsActivity))
 
         val adapter = HomePageAdapter()
         adapter.setNewInstance(entranceList)

@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlaygroundKt">
-        <activity android:name=".activity.jetpack.RoomActivity"></activity>
+        <activity android:name=".ShortcutsActivity"></activity>
+        <activity android:name=".activity.jetpack.RoomActivity" />
         <activity android:name=".activity.jetpack.resultAPI.ResultFirstActivity" />
         <activity android:name=".activity.jetpack.resultAPI.ResultSecondActivity" />
         <activity android:name=".activity.SharePreferenceANRActivity" />
@@ -28,6 +29,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- 添加支持shortcuts  必须添加在启动的activity -->
+<!--            <meta-data-->
+<!--                android:name="android.app.shortcuts"-->
+<!--                android:resource="@xml/shortcuts" />-->
         </activity>
     </application>
 

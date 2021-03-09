@@ -25,5 +25,6 @@ class RouterPath {
         const val ResultFirstActivity = "/function/ResultFirstActivity"
         const val RoomActivity = "/function/RoomActivity"
         const val ResultSecondActivity = "/function/ResultSecondActivity"
+        const val ShortcutsActivity = "/function/ShortcutsActivity"
     }
 }
