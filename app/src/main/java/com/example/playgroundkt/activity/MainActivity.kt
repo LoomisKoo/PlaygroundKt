@@ -78,6 +78,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         entranceList.add(HomePageData("Shortcuts", RouterPath.ShortcutsActivity))
         entranceList.add(HomePageData("图片缩放", RouterPath.ZoomImageViewActivity))
         entranceList.add(HomePageData("滑动冲突", RouterPath.ScrollConflictActivity))
+        entranceList.add(HomePageData("事件分发", RouterPath.EventDispatchActivity))
 
         val adapter = HomePageAdapter()
         adapter.setNewInstance(entranceList)

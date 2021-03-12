@@ -13,8 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlaygroundKt">
-        <activity android:name=".activity.ScrollConflictActivity"></activity>
-        <activity android:name=".activity.ZoomImageViewActivity"></activity>
+        <activity android:name=".activity.EventDispatchActivity"></activity>
+        <activity android:name=".activity.ScrollConflictActivity" />
+        <activity android:name=".activity.ZoomImageViewActivity" />
         <activity android:name=".ShortcutsActivity" />
         <activity android:name=".activity.jetpack.RoomActivity" />
         <activity android:name=".activity.jetpack.resultAPI.ResultFirstActivity" />

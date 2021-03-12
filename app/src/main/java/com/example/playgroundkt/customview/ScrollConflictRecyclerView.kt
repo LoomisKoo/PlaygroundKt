@@ -28,10 +28,6 @@ class ScrollConflictRecyclerView : RecyclerView {
 
     private var mIsInnerIntercept = false
 
-    override fun onTouchEvent(e: MotionEvent?): Boolean {
-        return super.onTouchEvent(e)
-    }
-
     /**
      * 设置是否启用内部拦截法处理滑动冲突
      */
@@ -46,6 +42,7 @@ class ScrollConflictRecyclerView : RecyclerView {
             when (ev.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
                     // 请求父view不拦截
+                    // 这里down事件请求不拦截，后续的mov等事件都由该view处理
                     parent.requestDisallowInterceptTouchEvent(true)
                 }
                 MotionEvent.ACTION_MOVE -> {

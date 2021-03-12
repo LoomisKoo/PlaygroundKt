@@ -20,7 +20,7 @@ class ScrollConflictActivity : BaseDbActivity<ActivityScrollConflictBinding>() {
      * 0 内部拦截
      * 1 外部拦截
      */
-    private var mInterceptType = 1
+    private var mInterceptType = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

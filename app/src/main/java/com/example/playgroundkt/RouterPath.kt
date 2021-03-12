@@ -29,5 +29,6 @@ class RouterPath {
         const val ZoomImageViewActivity = "/function/ZoomImageViewActivity"
         const val ScrollConflictActivity = "/function/ScrollConflictActivity"
         const val PagerActivity = "/function/PagerActivity"
+        const val EventDispatchActivity = "/function/EventDispatchActivity"
     }
 }

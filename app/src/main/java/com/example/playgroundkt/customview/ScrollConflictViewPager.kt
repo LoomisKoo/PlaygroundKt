@@ -23,6 +23,10 @@ class ScrollConflictViewPager : ViewPager {
     private var mLastYIntercept = 0
     private var mIsOuter = false
 
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        return super.dispatchTouchEvent(ev)
+    }
+
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         // 父类实现了滑动冲突处理，这里注释掉 模拟滑动冲突
 //        super.onInterceptTouchEvent(ev);

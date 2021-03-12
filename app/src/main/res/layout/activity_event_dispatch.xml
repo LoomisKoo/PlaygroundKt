@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <com.example.playgroundkt.customview.DispatchEventViewGroup
+        android:id="@+id/viewgroup1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.example.playgroundkt.customview.DispatchEventViewGroup
+            android:id="@+id/viewgroup2"
+            android:layout_width="match_parent"
+            android:layout_margin="70dp"
+            android:background="@color/teal_200"
+            android:layout_height="match_parent"
+            android:padding="50dp">
+
+            <com.example.playgroundkt.customview.DispatchEventView
+                android:id="@+id/view"
+                android:background="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.example.playgroundkt.customview.DispatchEventViewGroup>
+
+
+        <TextView
+            android:text="点击不同的区域 观察log"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </com.example.playgroundkt.customview.DispatchEventViewGroup>
+
+</layout>
