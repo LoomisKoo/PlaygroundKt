@@ -26,5 +26,8 @@ class RouterPath {
         const val RoomActivity = "/function/RoomActivity"
         const val ResultSecondActivity = "/function/ResultSecondActivity"
         const val ShortcutsActivity = "/function/ShortcutsActivity"
+        const val ZoomImageViewActivity = "/function/ZoomImageViewActivity"
+        const val ScrollConflictActivity = "/function/ScrollConflictActivity"
+        const val PagerActivity = "/function/PagerActivity"
     }
 }

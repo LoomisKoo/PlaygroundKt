@@ -1,6 +1,7 @@
 package com.example.playgroundkt.activity
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import com.example.jetpackmvvm.base.activity.BaseDbActivity
 import com.example.playgroundkt.R
@@ -40,12 +41,25 @@ open class BaseEntranceActivity : BaseDbActivity<ActivityBaseEntranceBinding>() 
     fun addButton(btnName: String, onClickFunc: () -> Unit) {
         Button(this).let {
             it.text = btnName
-            it.onClick {
-                onClickFunc()
-            }
+            it.onClick { onClickFunc() }
             it.isAllCaps = false
             mDatabind.llRoot.addView(it)
         }
+    }
+
+    /**
+     * 加入一个view
+     */
+    fun addView(view: View, onClickFunc: () -> Unit) {
+        view.onClick { onClickFunc() }
+        mDatabind.llRoot.addView(view)
+    }
+
+    /**
+     * 加入一个view
+     */
+    fun addView(view: View) {
+        mDatabind.llRoot.addView(view)
     }
 
 }
