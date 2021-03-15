@@ -1,31 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.example.playgroundkt.customview.TransformativeImageView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
-
-        <com.example.playgroundkt.customview.TransformativeImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@color/teal_200"
-            android:src="@drawable/apple"
-            app:max_scale="100"
-            app:min_scale="1"
-            app:open_rotate_revert="true"
-            app:open_scale_revert="false"
-            app:open_translate_revert="true"
-            app:revert_duration="300"
-            app:scale_center="finger_center" />
-
-        <com.example.playgroundkt.customview.TestView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            android:background="@color/white" />
-    </FrameLayout>
+        android:layout_gravity="center"
+        android:background="@color/teal_200"
+        android:src="@drawable/apple"
+        app:max_scale="100"
+        app:min_scale="1"
+        app:open_rotate_revert="true"
+        app:open_scale_revert="false"
+        app:open_translate_revert="true"
+        app:revert_duration="300"
+        app:scale_center="finger_center" />
 </layout>

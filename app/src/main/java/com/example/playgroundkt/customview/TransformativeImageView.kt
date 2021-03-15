@@ -9,7 +9,6 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.VelocityTracker
-import android.view.ViewConfiguration
 import android.widget.Scroller
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.playgroundkt.R
@@ -52,21 +51,22 @@ open class TransformativeImageView constructor(
     //滑动帮助类
     private lateinit var mScroller: Scroller
 
-    private var velocityTracker: VelocityTracker? = null
+    private var mVelocityTracker: VelocityTracker? = null
 
-    private var xVelocity = 0
-    private var yVelocity = 0
+    private var mVelocityX = 0 // x轴移动速度
+    private var mVelocityY = 0 // y轴移动速度
 
-    private var finalX = 0
-    private var finalY = 0
-    private var mDownX = 0f
-    private var mDonwY = 0f
-    private var move_x = 0f
-    private var move_y = 0f
+    private var mFinalX = 0 // fling的最终X坐标
+    private var mFinalY = 0 // fling的最终Y坐标
+    private var mDownX = 0f // 按下的x坐标
+    private var mDownY = 0f // 按下的y坐标
+    private var mDX = 0f // X轴每次MOVE的距离
+    private var mDY = 0f // Y轴每次MOVE的距离
+
+    private var mIsInFling = false // 是否在fling中
 
     @JvmOverloads
-    constructor(context: Context, attrs: AttributeSet? = null) : this(context, attrs, 0) {
-    }
+    constructor(context: Context, attrs: AttributeSet? = null) : this(context, attrs, 0)
 
     private fun obtainAttrs(attrs: AttributeSet?) {
         if (attrs == null) return
@@ -98,7 +98,7 @@ open class TransformativeImageView constructor(
         )
         typedArray.recycle()
 
-        mScroller = Scroller(context);
+        mScroller = Scroller(context)
     }
 
     private fun init() {
@@ -127,7 +127,6 @@ open class TransformativeImageView constructor(
         mVerticalMinScaleFactor =
             (height / mImageRect.width()).coerceAtMost(width / mImageRect.height())
         var scaleFactor = mHorizontalMinScaleFactor
-
         // 初始图片缩放比例比最小缩放比例稍大
         scaleFactor *= INIT_SCALE_FACTOR
         mScaleFactor = scaleFactor
@@ -159,120 +158,91 @@ open class TransformativeImageView constructor(
     private val mLastPoint2 = PointF() // 上次事件的第二个触点
     private val mCurrentPoint1 = PointF() // 本次事件的第一个触点
     private val mCurrentPoint2 = PointF() // 本次事件的第二个触点
+
     private var mScaleFactor = 1.0f // 当前的缩放倍数
     private var mCanScale = false // 是否可以缩放
     private var mLastMidPoint = PointF() // 图片平移时记录上一次ACTION_MOVE的点
     private var mScaleMidPoint = PointF() // 图片缩放中点
+
     private val mCurrentMidPoint = PointF() // 当前各触点的中点
+
     private var mCanDrag = false // 是否可以平移
     private val mLastVector = PointF() // 记录上一次触摸事件两指所表示的向量
     private val mCurrentVector = PointF() // 记录当前触摸事件两指所表示的向量
+
     private var mCanRotate = false // 判断是否可以旋转
     private val mRevertAnimator = MatrixRevertAnimator() // 回弹动画
     private val mFromMatrixValue = FloatArray(9) // 动画初始时矩阵值
     private val mToMatrixValue = FloatArray(9) // 动画终结时矩阵值
+
     private var isTransforming = false // 图片是否正在变化
+
     private var isNeedFling = false // 是否需要惯性滑动
+    private var isMultiPoint = false // 是否多点触控
 
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        test(event)
+        handleTouchEvent(event)
         super.onTouchEvent(event)
         return true
     }
 
-    private fun test(event: MotionEvent) {
-        val midPoint = getMidPointOfFinger(event)
+    private fun handleTouchEvent(event: MotionEvent) {
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
                 // 标志着第一个手指按下
                 mDownX = event.x //获取按下时x坐标值
-                mDonwY = event.y //获取按下时y坐标值
+                mDownY = event.y //获取按下时y坐标值
+
                 //创建惯性滑动速度追踪类对象
-                velocityTracker = VelocityTracker.obtain();
+                mVelocityTracker = VelocityTracker.obtain()
                 pointDown(event)
-//                if(mOpenTranslateRevert){
-//                    isNeedFling = false
-//                }
             }
             MotionEvent.ACTION_POINTER_DOWN -> {
-                // 每次触摸事件开始都初始化mLastMidPoint
-                mScaleMidPoint.set(midPoint);
+                isMultiPoint = true
+                val midPoint = getMidPointOfFinger(event)
+                mScaleMidPoint.set(midPoint)
                 pointDown(event)
-//                isNeedFling = false
             }
             MotionEvent.ACTION_MOVE -> {
                 //按住一点手指开始移动
-                move_x = mDownX - event.x //计算当前已经移动的x轴方向的距离
-                move_y = mDonwY - event.y //计算当前已经移动的y轴方向的距离
-                if (event.pointerCount == 1 && mCanDrag) {
-                    if (mScroller.isFinished) {
-                        mScroller.startScroll(finalX, finalY, move_x.toInt(), move_y.toInt(), 0);
-                        invalidate()
-                    }
-                } else {
-                    if (mCanScale) {
-                        scale(event)
-                    }
-                    if (mCanRotate) {
-                        rotate(event)
-                    }
-                    // 判断图片是否发生了变换
-                    if (imageMatrix != mMatrix) isTransforming = true
-                    applyMatrix()
-                }
+                mDX = mDownX - event.x //计算当前已经移动的x轴方向的距离
+                mDY = mDownY - event.y //计算当前已经移动的y轴方向的距离
+
+                translateImg(event)
 
                 //将事件加入到VelocityTracker类实例中
-                velocityTracker?.addMovement(event)
+                mVelocityTracker?.addMovement(event)
                 //计算1秒内滑动的像素个数
-                velocityTracker?.computeCurrentVelocity(1000)
+                mVelocityTracker?.computeCurrentVelocity(100)
                 //X轴方向的速度
-                xVelocity = velocityTracker?.xVelocity?.toInt() ?: 0
+                mVelocityX = mVelocityTracker?.xVelocity?.toInt() ?: 0
                 //Y轴方向的速度
-                yVelocity = velocityTracker?.yVelocity?.toInt() ?: 0
+                mVelocityY = mVelocityTracker?.yVelocity?.toInt() ?: 0
             }
 
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-//                isNeedFling = isNeedFling()
-                if (!isNeedFling) {
+                isNeedFling = isNeedFling(isMultiPoint)
+                if (isNeedFling) {
+                    fling()
+                } else {
                     boundAnimation()
                 }
+
+                isMultiPoint = false
 
                 mCanScale = false
                 mCanDrag = false
                 mCanRotate = false
 
-                //获取认为是fling的最小速率
-                val mMinimumFlingVelocity =
-                    ViewConfiguration.get(context).scaledMaximumFlingVelocity / 30
-                if (abs(xVelocity) >= mMinimumFlingVelocity || abs(yVelocity) > mMinimumFlingVelocity) {
-                    if (isNeedFling) {
-                        // fling前拿到最新的XY值
-                        finalX = mScroller.finalX
-                        finalY = mScroller.finalY
-
-                        mScroller.fling(
-                            finalX,
-                            finalY,
-                            -xVelocity,
-                            -yVelocity,
-                            -width + 100,
-                            10000,
-                            -height + 100,
-                            10000
-                        )
-                    }
-                } else { //缓慢滑动不处理
-                }
+                mFinalX = mScroller.finalX
+                mFinalY = mScroller.finalY
 
                 invalidate()
-                // invalidate()后更新XY值
-                finalX = mScroller.finalX
-                finalY = mScroller.finalY
 
-                velocityTracker?.recycle()
-                velocityTracker?.clear()
-                velocityTracker = null
+                mVelocityTracker?.recycle()
+                mVelocityTracker?.clear()
+                mVelocityTracker = null
             }
             MotionEvent.ACTION_POINTER_UP -> {
                 mCanScale = false
@@ -282,26 +252,102 @@ open class TransformativeImageView constructor(
         }
     }
 
+    /**
+     * 使图片进行平移、旋转、缩放等操作
+     */
+    private fun translateImg(event: MotionEvent) {
+        // 多指操作。可进行缩放和旋转
+        if (isMultiPoint) {
+            if (mCanScale) {
+                scale(event)
+            }
+            if (mCanRotate) {
+                rotate(event)
+            }
+            // 判断图片是否发生了变换
+            if (imageMatrix != mMatrix) isTransforming = true
+            applyMatrix()
+        }
+        // 单指操作。可进行平移
+        else {
+            if (!mCanDrag) return
+            if (mScroller.isFinished) {
+                mScroller.startScroll(mFinalX, mFinalY, mDX.toInt(), mDY.toInt(), 0)
+                // 这里是为了触发computeScroll()  在该方法里面进行平移
+                invalidate()
+            }
+           
+        }
+    }
+
+    private fun fling() {
+        //获取认为是fling的最小速率
+//                val mMinimumFlingVelocity =
+//                    ViewConfiguration.get(context).scaledMaximumFlingVelocity / 1000
+//                if (abs(xVelocity) >= mMinimumFlingVelocity || abs(yVelocity) > mMinimumFlingVelocity) {
+
+        if (abs(mVelocityX) > 50 || abs(mVelocityY) > 50) {
+            // fling前拿到最新的XY值
+            mFinalX = mScroller.finalX
+            mFinalY = mScroller.finalY
+
+            mScroller.fling(
+                mFinalX,
+                mFinalY,
+                -mVelocityX,
+                -mVelocityY,
+                -(mImageRect.width().toInt() ushr 1),
+                mImageRect.width().toInt() ushr 1,
+                -(mImageRect.height().toInt() ushr 1),
+                mImageRect.height().toInt() ushr 1
+            )
+            mIsInFling = true
+        } else { // 缓慢滑动则回弹
+            boundAnimation()
+        }
+    }
+
 
     /**
      * 是否需要惯性滑动
      */
-    private fun isNeedFling(): Boolean {
-        // 是否放大超出了屏幕
-//        val isBeyondView = mImageRect.width() > width || mImageRect.height() > height
-        val isBeyondView =
-            mImageRect.top < top || mImageRect.left < left || mImageRect.bottom > bottom || mImageRect.right > right
+    private fun isNeedFling(isMultiPoint: Boolean): Boolean {
         return when {
-            isBeyondView -> {
-                true
-            }
-            mOpenTranslateRevert -> {
-                false
-            }
-            else -> {
-                false
-            }
+            isMultiPoint -> false // 若多点触控，则不进行fling
+            isHasSpaceWithBorder() -> false
+            !isHasSpaceWithBorder() -> true
+            mOpenTranslateRevert -> false // 这个优先级最低
+            else -> true
         }
+    }
+
+
+    /**
+     * 图片与view边界是否存在间隙
+     */
+    private fun isHasSpaceWithBorder(): Boolean {
+        // 图片与view边界是否有间隙
+        var isHasSpaceWithBorder = false
+
+        // mImageRect中的坐标值为相对View的值
+        // 图片宽大于控件时图片与控件之间不能有白边
+        if (mImageRect.width() > width) {
+            if (mImageRect.left > 0 || mImageRect.right < width) { /*判断图片左右边界与控件之间是否有空隙*/
+                isHasSpaceWithBorder = true
+            }
+        } else { /*宽小于控件则移动到中心*/
+            isHasSpaceWithBorder = true
+        }
+        // 图片高大于控件时图片与控件之间不能有白边
+        if (mImageRect.height() > height) {
+            if (mImageRect.top > 0 || mImageRect.bottom < height) { /*判断图片上下边界与控件之间是否有空隙*/
+                isHasSpaceWithBorder = true
+            }
+        } else { /*高小于控件则移动到中心*/
+            isHasSpaceWithBorder = true
+        }
+
+        return isHasSpaceWithBorder
     }
 
     /**
@@ -313,9 +359,25 @@ open class TransformativeImageView constructor(
         // 旋转和缩放都会影响矩阵，进而影响后续需要使用到ImageRect的地方，所以检测顺序不能改变
         if (mOpenRotateRevert) checkRotation()
         if (mOpenScaleRevert) checkScale()
-        if (mOpenTranslateRevert) checkBorder()
+        if (mOpenTranslateRevert) resetBorder()
 
         mMatrix.getValues(mToMatrixValue) // 设置矩阵动画结束值
+        if (mOpenAnimator) {
+            // 启动回弹动画
+            mRevertAnimator.setMatrixValue(mFromMatrixValue, mToMatrixValue)
+            mRevertAnimator.cancel()
+            mRevertAnimator.start()
+        } else {
+            applyMatrix()
+        }
+    }
+
+
+    private fun borderResetAnimation() {
+        mMatrix.getValues(mFromMatrixValue)
+        if (mOpenTranslateRevert) resetBorder()
+        mMatrix.getValues(mToMatrixValue) // 设置矩阵动画结束值
+
         if (mOpenAnimator) {
             // 启动回弹动画
             mRevertAnimator.setMatrixValue(mFromMatrixValue, mToMatrixValue)
@@ -350,14 +412,20 @@ open class TransformativeImageView constructor(
         super.computeScroll()
         if (mScroller.computeScrollOffset()) {//判断滚动是否完成，true说明滚动尚未完成，false说明滚动已经完成
             val curPoint = PointF(-mScroller.currX.toFloat(), -mScroller.currY.toFloat())
-            println("koo----- computeScroll " + mScroller.currX.toFloat() + "   " + mScroller.currY.toFloat())
-
-            translate(curPoint)
+            handleTouchEvent(curPoint)
             applyMatrix()
-            invalidate();//触发view重绘
+            invalidate()//触发view重绘
+        } else {
+            if (mIsInFling && isHasSpaceWithBorder()) {
+                mIsInFling = false
+                borderResetAnimation()
+            }
         }
     }
 
+    /**
+     * 旋转
+     */
     private fun rotate(event: MotionEvent) {
         // 计算当前两指触点所表示的向量
         mCurrentVector[event.getX(1) - event.getX(0)] = event.getY(1) - event.getY(0)
@@ -377,16 +445,16 @@ open class TransformativeImageView constructor(
      */
     private fun getRotateDegree(lastVector: PointF, currentVector: PointF): Float {
         //上次触摸事件向量与x轴夹角
-        val lastRad = Math.atan2(lastVector.y.toDouble(), lastVector.x.toDouble())
+        val lastRad = atan2(lastVector.y.toDouble(), lastVector.x.toDouble())
         //当前触摸事件向量与x轴夹角
-        val currentRad = Math.atan2(currentVector.y.toDouble(), currentVector.x.toDouble())
+        val currentRad = atan2(currentVector.y.toDouble(), currentVector.x.toDouble())
         // 两向量与x轴夹角之差即为需要旋转的角度
         val rad = currentRad - lastRad
         //“弧度”转“度”
         return Math.toDegrees(rad).toFloat()
     }
 
-    private fun translate(curPoint: PointF) {
+    private fun handleTouchEvent(curPoint: PointF) {
         val dx = curPoint.x - mLastMidPoint.x
         val dy = curPoint.y - mLastMidPoint.y
         mMatrix.postTranslate(dx, dy)
@@ -431,6 +499,9 @@ open class TransformativeImageView constructor(
         return scaleCenter
     }
 
+    /**
+     * 缩放
+     */
     private fun scale(event: MotionEvent) {
         val scaleCenter = getScaleCenter()
         // 初始化当前两指触点
@@ -547,9 +618,7 @@ open class TransformativeImageView constructor(
     /**
      * 将图片移回控件中心
      */
-    private fun checkBorder() {
-        // 由于旋转回弹与缩放回弹会影响图片所在位置，所以此处需要更新ImageRect的值
-        refreshImageRect()
+    private fun resetBorder() {
         // 默认不移动
         var dx = 0f
         var dy = 0f
@@ -576,7 +645,13 @@ open class TransformativeImageView constructor(
         } else { /*高小于控件则移动到中心*/
             dy = height / 2 - mImageRect.centerY()
         }
-        mMatrix.postTranslate(dx, dy)
+
+        if (dx != 0f || dy != 0f) {
+            // 由于旋转回弹与缩放回弹会影响图片所在位置，所以此处需要更新ImageRect的值
+            refreshImageRect()
+            mMatrix.postTranslate(dx, dy)
+        }
+
     }
 
     /**
@@ -605,7 +680,7 @@ open class TransformativeImageView constructor(
     /**
      * 图片回弹动画
      */
-    private inner class MatrixRevertAnimator() : ValueAnimator(),
+    private inner class MatrixRevertAnimator : ValueAnimator(),
         AnimatorUpdateListener {
         private var mFromMatrixValue // 动画初始时矩阵值
                 : FloatArray? = null
