@@ -14,15 +14,5 @@ class ZoomImageViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityZoomImageBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
-//        val view =
-//            TransformativeImageView(this)
-//        view.background = resources.getDrawable(R.drawable.ic_launcher_round)
-//        (mBinding.root as LinearLayout).addView(view)
-//        mBinding.imageView.background = resources.getDrawable(R.drawable.ic_launcher_round)
-
-//        Glide.with(this)
-//            .load(R.drawable.cat)
-//            .into(transformativeImageView1);
-
     }
 }

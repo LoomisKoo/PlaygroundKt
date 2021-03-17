@@ -12,9 +12,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:excludeFromRecents="true"
         android:theme="@style/Theme.PlaygroundKt">
         <activity android:name=".activity.EventDispatchActivity"></activity>
-        <activity android:name=".activity.ScrollConflictActivity" />
+        <activity android:name=".activity.ScrollConflictActivity"/>
         <activity android:name=".activity.ZoomImageViewActivity" />
         <activity android:name=".ShortcutsActivity" />
         <activity android:name=".activity.jetpack.RoomActivity" />

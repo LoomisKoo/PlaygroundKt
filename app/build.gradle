@@ -95,4 +95,10 @@ dependencies {
 
     implementation 'com.anggrayudi:android-hidden-api:30.0'
 
+    // room
+//    implementation "androidx.room:room-runtime:2.1.1"
+//    kapt "androidx.room:room-compiler:2.1.1"
+//    // optional - Kotlin Extensions and Coroutines support for Room
+//    implementation "androidx.room:room-ktx:2.1.1"
+
 }

@@ -18,7 +18,7 @@ import kotlin.math.sqrt
 
 
 /**
- * @Description: java类作用描述
+ * @Description: 支持手势缩放/旋转/平移 的AppCompatImageView
  * @Author: chunxiong.gu
  * @CreateDate: 2021/3/9 17:00
  * @UpdateUser: 更新者
