@@ -1,4 +1,4 @@
-package com.example.playgroundkt.activity
+package com.example.playgroundkt.activity.other
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -34,7 +34,7 @@ class ScrollConflictActivity : BaseDbActivity<ActivityScrollConflictBinding>() {
         //将适配器和ViewPager结合
         mDatabind.viewPager.adapter = adapter;
 
-        mDatabind.viewPager.setIsOuter(mInterceptType == 1)
+        mDatabind.viewPager.setIsOuter(mInterceptType == 0)
 
     }
 

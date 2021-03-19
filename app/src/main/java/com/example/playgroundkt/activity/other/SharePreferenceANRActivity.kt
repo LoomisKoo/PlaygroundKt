@@ -1,9 +1,10 @@
-package com.example.playgroundkt.activity
+package com.example.playgroundkt.activity.other
 
 import android.content.Context
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.playgroundkt.RouterPath
+import com.example.playgroundkt.activity.BaseEntranceActivity
 
 /**
  *

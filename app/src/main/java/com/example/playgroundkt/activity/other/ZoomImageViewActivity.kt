@@ -1,4 +1,4 @@
-package com.example.playgroundkt.activity
+package com.example.playgroundkt.activity.other
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

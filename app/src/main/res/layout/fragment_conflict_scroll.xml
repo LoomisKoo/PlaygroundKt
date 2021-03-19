@@ -3,12 +3,20 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:clickable="true"
+            android:text="新增数据"
+            android:id="@+id/btn_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <com.example.playgroundkt.customview.ScrollConflictRecyclerView
             android:id="@+id/recycler_view"
-            tools:listitem="@layout/item_conflict_scroll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_conflict_scroll" />
     </LinearLayout>
 </layout>

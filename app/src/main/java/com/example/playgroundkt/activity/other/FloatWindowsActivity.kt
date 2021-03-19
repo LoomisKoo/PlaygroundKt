@@ -1,4 +1,4 @@
-package com.example.playgroundkt.activity
+package com.example.playgroundkt.activity.other
 
 import android.content.Intent
 import android.graphics.Color
