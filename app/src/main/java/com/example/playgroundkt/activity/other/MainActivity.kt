@@ -63,6 +63,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     private fun initRecyclerView() {
         val entranceList = ArrayList<HomePageData>()
+        entranceList.add(HomePageData("列表显示大图", RouterPath.RvBigImgActivity))
         entranceList.add(HomePageData("浮窗功能", RouterPath.FloatWindowsActivity))
         entranceList.add(HomePageData("kotlin", RouterPath.KotlinActivity))
         entranceList.add(HomePageData("SP ANR", RouterPath.SharePreferenceANRActivity))

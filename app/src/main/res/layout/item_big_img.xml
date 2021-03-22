@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <com.example.playgroundkt.customview.ScrollImageView
+        android:background="@color/teal_200"
+        android:id="@+id/iv_content"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:src="@drawable/long_img"
+        android:text="content"
+        android:scaleType="matrix"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:text="content"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+</FrameLayout>
