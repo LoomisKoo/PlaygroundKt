@@ -1,6 +1,5 @@
 package com.example.playgroundkt.activity.other
 
-import android.graphics.*
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -53,8 +52,9 @@ class RvBigImgActivity : BaseEntranceActivity() {
                     val firstItemPosition = layoutManager.findFirstVisibleItemPosition()
                     for (position in firstItemPosition until lastItemPosition - 1) {
                         if (dataList[position].type != 1) continue
-                        adapter.data[position].dy = dy
-                        mImageMap[position]?.setMatrix(dy)
+                        var translateY = adapter.data[position].translateY
+                        translateY = mImageMap[position]?.setMatrix(translateY, dy) ?: 0
+                        adapter.data[position].translateY = translateY
                     }
 //                    val count = lastItemPosition - firstItemPosition - 1
 //                    adapter.notifyItemChanged(firstItemPosition,count)
@@ -89,6 +89,6 @@ class RvBigImgActivity : BaseEntranceActivity() {
     data class Data(
         val content: String,
         val type: Int = 0,
-        var dy: Int = 0
+        var translateY: Int = 0
     )
 }

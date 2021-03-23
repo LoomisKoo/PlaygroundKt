@@ -27,23 +27,24 @@ class ScrollImageView : AppCompatImageView {
     var isGetBounds = false
     var hasScale = false
     private var bounds: Rect? = null
-    private var mTranslateY = 0
 
-    fun setMatrix(dy: Int) {
+    fun setMatrix(translatedY: Int, dy: Int): Int {
         if (!isGetBounds && drawable.bounds.width() > 0 && width > 0) {
 //            isGetBounds = true
             bounds = drawable.bounds
         }
 
+        var tY = translatedY
+
 
         bounds?.let {
-            mTranslateY += dy
+            tY += dy
             val scaleRate: Float = width / it.width().toFloat()
 
-            if (mTranslateY > 0) {
-                mTranslateY = 0
-            } else if (mTranslateY < -(it.height() * scaleRate - height)) {
-                mTranslateY = -((it.height() * scaleRate - height)).toInt()
+            if (tY > 0) {
+                tY = 0
+            } else if (tY < -(it.height() * scaleRate - height)) {
+                tY = -((it.height() * scaleRate - height)).toInt()
             }
             val matrix = Matrix()
             // 设置放缩比例
@@ -55,13 +56,14 @@ class ScrollImageView : AppCompatImageView {
                 matrix.preTranslate(0f, (height / 2 - it.height() * scaleRate / 2) / scaleRate)
             } else {
                 // 平移
-                matrix.preTranslate(0f, mTranslateY.toFloat() / scaleRate)
+                matrix.preTranslate(0f, tY.toFloat() / scaleRate)
             }
 
             println("koo-----2 scaleRate   $scaleRate   ")
 
-
             imageMatrix = matrix
+            return tY
         }
+        return 0
     }
 }
