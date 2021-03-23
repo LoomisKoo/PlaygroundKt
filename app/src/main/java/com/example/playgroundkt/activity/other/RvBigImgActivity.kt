@@ -15,6 +15,7 @@ import com.example.playgroundkt.activity.BaseEntranceActivity
 import com.example.playgroundkt.customview.ScrollImageView
 import java.util.*
 import kotlin.collections.HashMap
+import kotlin.collections.LinkedHashMap
 
 @Route(path = RouterPath.RvBigImgActivity)
 class RvBigImgActivity : BaseEntranceActivity() {
@@ -56,14 +57,15 @@ class RvBigImgActivity : BaseEntranceActivity() {
                         translateY = mImageMap[position]?.setMatrix(translateY, dy) ?: 0
                         adapter.data[position].translateY = translateY
                     }
-//                    val count = lastItemPosition - firstItemPosition - 1
-//                    adapter.notifyItemChanged(firstItemPosition,count)
                 }
             }
         })
     }
 
-    val mImageMap = HashMap<Int, ScrollImageView>()
+    /**
+     * 最多保存3个imageview的实例（LRU算法）
+     */
+    val mImageMap = MaxHashMap<Int, ScrollImageView>(3)
 
     inner class Adapter : BaseQuickAdapter<Data, BaseViewHolder>(R.layout.item_big_img) {
         override fun convert(holder: BaseViewHolder, item: Data) {
@@ -75,14 +77,19 @@ class RvBigImgActivity : BaseEntranceActivity() {
                 val imageView = holder.getView<ScrollImageView>(R.id.iv_content)
                 imageView.let {
                     mImageMap[holder.adapterPosition] = it
-//                    it.setMatrix(item.dy)
                     it.visibility = View.VISIBLE
                 }
 
                 holder.getView<TextView>(R.id.tv_content).visibility = View.GONE
             }
         }
+    }
 
+
+    class MaxHashMap<K, V>(val maxSize: Int) : LinkedHashMap<K, V>(maxSize, 1f, false) {
+        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<K, V>?): Boolean {
+            return (size > maxSize);
+        }
     }
 
 
