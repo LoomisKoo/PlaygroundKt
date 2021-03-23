@@ -31,10 +31,10 @@ class ScrollImageView : AppCompatImageView {
 
     fun setMatrix(dy: Int) {
         if (!isGetBounds && drawable.bounds.width() > 0 && width > 0) {
-            isGetBounds = true
+//            isGetBounds = true
             bounds = drawable.bounds
-
         }
+
 
         bounds?.let {
             mTranslateY += dy
@@ -57,6 +57,10 @@ class ScrollImageView : AppCompatImageView {
                 // 平移
                 matrix.preTranslate(0f, mTranslateY.toFloat() / scaleRate)
             }
+
+            println("koo-----2 scaleRate   $scaleRate   ")
+
+
             imageMatrix = matrix
         }
     }

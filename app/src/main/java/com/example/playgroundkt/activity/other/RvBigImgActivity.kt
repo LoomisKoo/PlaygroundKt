@@ -51,10 +51,13 @@ class RvBigImgActivity : BaseEntranceActivity() {
                     val lastItemPosition = layoutManager.findLastVisibleItemPosition()
                     //获取第一个可见view的位置
                     val firstItemPosition = layoutManager.findFirstVisibleItemPosition()
-                    for (position in firstItemPosition until lastItemPosition) {
+                    for (position in firstItemPosition until lastItemPosition - 1) {
                         if (dataList[position].type != 1) continue
+                        adapter.data[position].dy = dy
                         mImageMap[position]?.setMatrix(dy)
                     }
+//                    val count = lastItemPosition - firstItemPosition - 1
+//                    adapter.notifyItemChanged(firstItemPosition,count)
                 }
             }
         })
@@ -72,6 +75,7 @@ class RvBigImgActivity : BaseEntranceActivity() {
                 val imageView = holder.getView<ScrollImageView>(R.id.iv_content)
                 imageView.let {
                     mImageMap[holder.adapterPosition] = it
+//                    it.setMatrix(item.dy)
                     it.visibility = View.VISIBLE
                 }
 
