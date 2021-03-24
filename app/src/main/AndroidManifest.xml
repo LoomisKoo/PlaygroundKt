@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlaygroundKt">
-        <activity android:name=".activity.other.ThreadLocalActivity"></activity>
+        <activity android:name=".activity.other.HandlerActivity"></activity>
+        <activity android:name=".activity.other.ThreadLocalActivity" />
         <activity android:name=".activity.other.RvBigImgActivity" />
         <activity android:name=".activity.other.EventDispatchActivity" />
         <activity android:name=".activity.other.ScrollConflictActivity" />
