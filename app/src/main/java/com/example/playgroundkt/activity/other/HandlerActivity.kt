@@ -24,7 +24,7 @@ class HandlerActivity : BaseEntranceActivity() {
     }
     var handler3 = Handler(Looper.myLooper()!!)
 
-    var handler4 = Handler() {
+    var handler4 = Handler {
         println("koo----- handler4")
         false
     }
