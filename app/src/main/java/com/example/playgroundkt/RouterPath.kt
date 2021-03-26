@@ -16,6 +16,7 @@ package com.example.playgroundkt
 class RouterPath {
     companion object {
         // 常量命名与页面一致，方便开发
+        const val ProxyActivity = "/function/ProxyActivity"
         const val ReflectActivity = "/function/ReflectActivity"
         const val HandlerActivity = "/function/HandlerActivity"
         const val ThreadLocalActivity = "/function/ThreadLocalActivity"
