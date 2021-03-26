@@ -8,6 +8,10 @@ import com.example.playgroundkt.data.ReflectPersonData
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 
+
+/**
+ * 参考：https://www.jianshu.com/p/9be58ee20dee
+ */
 @Route(path = RouterPath.ReflectActivity)
 class ReflectActivity : BaseEntranceActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +24,7 @@ class ReflectActivity : BaseEntranceActivity() {
         }
 
         addButton("通过class获取实例") {
-            val instance = getInstance() as ReflectPersonData?
+            val instance = getInstance(ReflectPersonData::class.java) as ReflectPersonData?
             instance?.getName()
             println("koo----- instance   name:${instance?.getName()}  age:${instance?.getAge()}")
         }
@@ -71,10 +75,11 @@ class ReflectActivity : BaseEntranceActivity() {
     /**
      * 通过反射获取实例
      */
-    private fun getInstance(): Any? {
-        val personClass = ReflectPersonData::class.java
+    private fun getInstance(oneClass: Class<out Any>): Any? {
+//        val personClass = ReflectPersonData::class.java
+        oneClass.newInstance()
         // 由于这里不能带参数，所以你要实例化的这个类一定要有无参构造函数
-        return personClass.newInstance()
+        return oneClass.newInstance()
     }
 
     /**
@@ -172,5 +177,4 @@ class ReflectActivity : BaseEntranceActivity() {
         println("koo----- loaderName$loaderName")
 
     }
-
 }
