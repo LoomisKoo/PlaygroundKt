@@ -57,7 +57,7 @@ class ReflectActivity : BaseEntranceActivity() {
             // 获取class的几种方式
 //            val personClass = Class.forName("ReflectPersonData")
 //            val personClass = Class.forName("com.example.playgroundkt.data.ReflectPersonData")
-//            val personClass = person.javaClass.getDeclaredField(fieldName)
+//            val personClass = person.javaClass
             val personClass = ReflectPersonData::class.java
 
             val field = personClass.getDeclaredField(fieldName)
@@ -76,9 +76,8 @@ class ReflectActivity : BaseEntranceActivity() {
      * 通过反射获取实例
      */
     private fun getInstance(oneClass: Class<out Any>): Any? {
-//        val personClass = ReflectPersonData::class.java
         oneClass.newInstance()
-        // 由于这里不能带参数，所以你要实例化的这个类一定要有无参构造函数
+        // 由于这里不能带参数，所以实例化的这个类一定要有无参构造函数
         return oneClass.newInstance()
     }
 
@@ -151,7 +150,7 @@ class ReflectActivity : BaseEntranceActivity() {
             val personClass = ReflectPersonData::class.java
             val instance = personClass.newInstance()
 
-            val method1: Method = personClass.getMethod("getName")
+            val method1: Method = personClass.getDeclaredMethod("getName")
             var name: String = method1.invoke(instance) as String
 
             println("koo----- name:$name")

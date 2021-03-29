@@ -1,3 +1,4 @@
+import android.view.View
 import java.util.*
 
 /**
@@ -14,7 +15,7 @@ import java.util.*
  * @Version: 1.0
  */
 var lastClickTime = 0L
-fun singleClick(during: Long = 500L, callBack: () -> Unit) {
+fun View.singleClick(during: Long = 500L, callBack: () -> Unit) {
     var now = Date().time
     if (now - lastClickTime > during) {
         callBack()

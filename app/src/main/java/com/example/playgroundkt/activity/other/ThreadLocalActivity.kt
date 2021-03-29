@@ -8,7 +8,7 @@ import com.example.playgroundkt.activity.BaseEntranceActivity
 /**
  * 1.ThreadLocal 为变量在每个线程中都创建了一个副本，那么每个线程可以访问自己内部的副本变量
  * 2.每个 Thread 维护着一个 ThreadLocalMap 的引用
- * 3.ThreadLocalMap 是 ThreadLocal 的内部类，用Entry来进行存储
+ * 3.ThreadLocalMap 是 ThreadLocal 的内部类，用 Entry 来进行存储
  * 4.ThreadLocal 创建的副本是存储在自己的 threadLocals 中的，也就是自己的 ThreadLocalMap
  * 5.ThreadLocalMap 的键值为 ThreadLocal 对象，而且可以有多个 threadLocal 变量，因此保存在map中
  * 6.在进行 get 之前，必须先 set，否则会报空指针异常，当然也可以初始化一个，但是必须重写 initialValue() 方法

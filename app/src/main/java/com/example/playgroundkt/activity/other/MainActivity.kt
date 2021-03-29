@@ -63,6 +63,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     private fun initRecyclerView() {
         val entranceList = ArrayList<HomePageData>()
+        entranceList.add(HomePageData("注解", RouterPath.AnnotationActivity))
         entranceList.add(HomePageData("代理", RouterPath.ProxyActivity))
         entranceList.add(HomePageData("反射", RouterPath.ReflectActivity))
         entranceList.add(HomePageData("Hanlder", RouterPath.HandlerActivity))

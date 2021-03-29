@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlaygroundKt">
-        <activity android:name=".activity.other.ProxyActivity"></activity>
+        <activity android:name=".activity.other.AnnotationActivity"></activity>
+        <activity android:name=".activity.other.ProxyActivity" />
         <activity android:name=".activity.other.ReflectActivity" />
         <activity android:name=".activity.other.HandlerActivity" />
         <activity android:name=".activity.other.ThreadLocalActivity" />
