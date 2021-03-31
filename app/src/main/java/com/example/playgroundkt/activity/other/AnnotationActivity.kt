@@ -1,6 +1,5 @@
 package com.example.playgroundkt.activity.other
 
-import android.annotation.CheckResult
 import android.os.Bundle
 import androidx.annotation.CallSuper
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -13,7 +12,8 @@ import java.lang.annotation.Inherited
  *     1.@Retention：注解保留的生命周期
  *     2.@Target：注解对象的作用范围
  *     3.@Inherited：@Inherited标明所修饰的注解，在所作用的类上，是否可以被继承
- *     4.@Documented：如其名，javadoc的工具文档化，一般不关心
+ *     4.@Documented：javadoc的工具文档化，一般不关心
+ *     5.@Repeatable：使得作用的注解可以取多个值
  */
 
 /**
