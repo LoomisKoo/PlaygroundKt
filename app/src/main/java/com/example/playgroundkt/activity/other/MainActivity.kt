@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.aptnote.arouter.ArouterPath
 import com.example.jetpackmvvm.network.manager.NetState
 import com.example.playgroundkt.RouterPath
 import com.example.playgroundkt.data.HomePageData
@@ -63,6 +62,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     private fun initRecyclerView() {
         val entranceList = ArrayList<HomePageData>()
+        entranceList.add(HomePageData("ISP", RouterPath.IspActivity))
         entranceList.add(HomePageData("AOPT", RouterPath.POETActivity))
         entranceList.add(HomePageData("注解", RouterPath.AnnotationActivity))
         entranceList.add(HomePageData("代理", RouterPath.ProxyActivity))

@@ -12,7 +12,6 @@ dependencies {
        这个时候必须使用annotationProcessor进行引入
      */
     annotationProcessor 'com.google.auto.service:auto-service:1.0-rc4'
-    // 虽然已经通过 annotationProcessor 引入,todo
     implementation 'com.google.auto.service:auto-service:1.0-rc4'
 
 }

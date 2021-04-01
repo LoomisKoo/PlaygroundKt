@@ -14,7 +14,9 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/aptlibrary" />
             <option value="$PROJECT_DIR$/aptnote" />
+            <option value="$PROJECT_DIR$/isp" />
             <option value="$PROJECT_DIR$/jetpackmvvm" />
+            <option value="$PROJECT_DIR$/spi" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
