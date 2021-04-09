@@ -36,7 +36,6 @@ class ScrollImageView : AppCompatImageView {
 
         var tY = translatedY
 
-
         bounds?.let {
             tY += dy
             val scaleRate: Float = width / it.width().toFloat()

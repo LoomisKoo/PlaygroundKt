@@ -2,6 +2,7 @@ package com.example.playgroundkt.activity.other
 
 import android.os.Bundle
 import androidx.annotation.CallSuper
+import androidx.annotation.FloatRange
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.example.playgroundkt.RouterPath
 import com.example.playgroundkt.activity.BaseEntranceActivity
@@ -79,6 +80,9 @@ import java.lang.annotation.Inherited
 
 @Route(path = RouterPath.AnnotationActivity)
 class AnnotationActivity : BaseEntranceActivity() {
+    fun test(@FloatRange(from = 1.0,to = 999999999999323985209384902349999.0) position:Double){
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         addButton("获取注解") {

@@ -7,6 +7,9 @@ import com.example.playgroundkt.RouterPath
 import com.example.playgroundkt.activity.BaseEntranceActivity
 import java.util.*
 
+/**
+ * @see ISP.md
+ */
 @Route(path = RouterPath.IspActivity)
 class SpiActivity : BaseEntranceActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

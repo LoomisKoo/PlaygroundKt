@@ -16,6 +16,7 @@ import com.example.playgroundkt.RouterPath
 import com.example.playgroundkt.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.jetbrains.anko.sdk25.coroutines.onClick
 
 @Route(path = RouterPath.FloatWindowsActivity)
 class FloatWindowsActivity : AppCompatActivity() {
@@ -32,7 +33,7 @@ class FloatWindowsActivity : AppCompatActivity() {
                 Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                 Uri.parse("package:$packageName")
             ), 0
-        );
+        )
     }
 
 
@@ -42,35 +43,36 @@ class FloatWindowsActivity : AppCompatActivity() {
     private fun showFloatingWindow() {
         if (Settings.canDrawOverlays(this)) {
             // 获取WindowManager服务
-            val windowManager = getSystemService(WINDOW_SERVICE) as WindowManager;
+            val windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
 
             // 设置LayoutParam
-            val layoutParams = WindowManager.LayoutParams();
+            val layoutParams = WindowManager.LayoutParams()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+                layoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
             } else {
-                layoutParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+                layoutParams.type = WindowManager.LayoutParams.TYPE_PHONE
             }
 
             layoutParams.flags =
                 WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL xor WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-            layoutParams.format = PixelFormat.RGBA_8888;
-            layoutParams.width = 500;
-            layoutParams.height = 100;
-            layoutParams.x = 700;
-            layoutParams.y = 400;
-            // 将悬浮窗控件添加到WindowManager
-            val btFloat = Button(this);
-            btFloat.text = "Floating Window";
-            btFloat.setBackgroundColor(Color.BLUE);
+            layoutParams.format = PixelFormat.RGBA_8888
+            layoutParams.width = 500
+            layoutParams.height = 100
+            layoutParams.x = 700
+            layoutParams.y = 400
+            // 将悬浮窗控件添加到 WindowManager
+            val btFloat = Button(this)
+            btFloat.text = "Floating Window"
+            btFloat.setBackgroundColor(Color.BLUE)
 
             // 加入浮窗
-            windowManager.addView(btFloat, layoutParams);
+            windowManager.addView(btFloat, layoutParams)
 
-            // 移除浮窗
-            lifecycleScope.launch {
-                delay(3000)
-                windowManager.removeView(btFloat)
+            btFloat.onClick {
+                // 移除浮窗
+                lifecycleScope.launch {
+                    windowManager.removeView(btFloat)
+                }
             }
 
         }else{

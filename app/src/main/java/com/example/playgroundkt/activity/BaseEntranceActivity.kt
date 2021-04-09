@@ -38,12 +38,13 @@ open class BaseEntranceActivity : BaseDbActivity<ActivityBaseEntranceBinding>() 
      * @param btnName 按钮名称
      * @param onClickFunc 按钮点击事件函数
      */
-    fun addButton(btnName: String, onClickFunc: () -> Unit) {
-        Button(this).let {
+    fun addButton(btnName: String, onClickFunc: () -> Unit): Button {
+        return Button(this).let {
             it.text = btnName
             it.onClick { onClickFunc() }
             it.isAllCaps = false
             mDatabind.llRoot.addView(it)
+            it
         }
     }
 

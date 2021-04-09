@@ -67,14 +67,14 @@ class RoomActivity : BaseEntranceActivity() {
     // SELECT name FROM product WHERE price > 500 OR type = '衣服'                       查询价格大于500或类型为衣服的商品名称
     // SELECT name FROM product WHERE price > 500 AND (type = '衣服' OR type = '文具')    查询价格大于500且类型为衣服/文具的商品名称
 
-    // SELECT COUNT(*) FROM product         从product表中计算所有列（包含NULL）的行数
-    // SELECT COUNT(name) FROM product      从product表中计算name列（不包含NULL）的行数
+    // SELECT COUNT(*) FROM product                  从product表中计算所有列（包含NULL）的行数
+    // SELECT COUNT(name) FROM product               从product表中计算name列（不包含NULL）的行数
     // SELECT COUNT(DISTINCT name) FROM product      从product表中计算name列（不包含NULL）去重的行数
     // SELECT DISTINCT COUNT(name) FROM product      从product表中计算name列（不包含NULL）的行数，然后再删除重复的行
-    // SELECT SUM(price) FROM product       计算所有商品的价格总和（若存在NULL则删除NULL再当计算）
-    // SELECT AVG(price) FROM product       计算所有商品的平均价格（若存在NULL则删除NULL再当计算）
-    // SELECT MAX(price) FROM product       计算所有商品的最大价格（若存在NULL则删除NULL再当计算）
-    // SELECT MIN(price) FROM product       计算所有商品的最小价格（若存在NULL则删除NULL再当计算）
+    // SELECT SUM(price) FROM product                计算所有商品的价格总和（若存在NULL则删除NULL再当计算）
+    // SELECT AVG(price) FROM product                计算所有商品的平均价格（若存在NULL则删除NULL再当计算）
+    // SELECT MAX(price) FROM product                计算所有商品的最大价格（若存在NULL则删除NULL再当计算）
+    // SELECT MIN(price) FROM product                计算所有商品的最小价格（若存在NULL则删除NULL再当计算）
 
     /**
      * GROUP BY 子句
@@ -83,17 +83,17 @@ class RoomActivity : BaseEntranceActivity() {
      * 3.GROUP BY 子句中不能使用SELECT子句中列的别名
      * 4.GROUP BY 子句的聚合结果是无序的
      * 5.WHERE 子句中不能使用聚合函数
-     * 6.GROUP BY 子句的书写位置也有严格要求，一定要写在FROM语句之后（如果有WHERE子句的话需要写在WHERE子句之后
+     * 6.GROUP BY 子句的书写位置也有严格要求，一定要写在FROM语句之后（如果有 WHERE 子句的话需要写在 WHERE 子句之后）
      * 7.GROUP BY 和 WHERE 并用时 SELECT 语句的执行顺序：FROM→WHERE→GROUP BY→SELECT
      * 8.SELECT 的列名必须包含在 GROUP BY 的列名内。SELECT name,product_type,COUNT(*) FROM product GROUP BY name
      *   product_type没有GROUP BY，所以报错
      * 9.GROUP BY子句中不能使用SELECT子句中定义的别名。比如：SELECT product_type AS type FROM product GROUP BY type
      *   这会报错。因为会先执行GROUP BY，这时数据库并不知道别名
-     * 10.只有SELECT子句和HAVING子句（以及ORDER BY子句）中能够使用聚合函数
+     * 10.只有 SELECT 子句和 HAVING 子句（以及 ORDER BY 子句）中能够使用聚合函数
      */
     // SELECT product_type,COUNT(*) FROM product GROUP BY product_type     查询出表里储存的所有商品类型，每种类型对应多少行（COUNT）
     /*
-      -- 首先使用了WHERE子句对记录进行过滤，得到衣服类型的商品后再进行分组（GROUP BY）
+      -- 首先使用了 WHERE 子句对记录进行过滤，得到衣服类型的商品后再进行分组（GROUP BY）
        SELECT purchase_price,COUNT(*) FROM product
        WHERE product_type = '衣服'
        GROUP BY purchase_price
@@ -133,16 +133,16 @@ class RoomActivity : BaseEntranceActivity() {
      * INSERT 语句
      * 1.原则上，INSERT 语句每次执行一行数据的插入
      * 2.将列名和值用逗号隔开，分别括在（）内，这种形式称为清单
-     * 3.表中所有列进行INSERT操作时可以省略表名后的列清单
+     * 3.表中所有列进行 INSERT 操作时可以省略表名后的列清单
      * 3.插入 NULL 时需要在 VALUES 子句的值清单中写入 NULL
      * 4.可以为表中的列设定默认值（初始值），默认值可以通过在 CREATE TABLE 语句中为列设置 DEFAULT 约束来设定
-     * 5.插入默认值可以通过两种方式实现，即在 INSERT 语句的VALUES子句中指定DEFAULT关键字（显式方法），或省略列清单（隐式方法）
+     * 5.插入默认值可以通过两种方式实现，即在 INSERT 语句的 VALUES 子句中指定 DEFAULT 关键字（显式方法），或省略列清单（隐式方法）
      * 6.使用 INSERT…SELECT 可以从其他表中复制数据
      * 7.表名后面的列清单和 VALUES 子句中的值清单的列数必须保持一致
      * 8.可以插入 NULL 值，但是插入的列设置了 NOT NULL 则会报错
      * 9.如果 key 设置有默认值，则插入的时候不插入对应的 key 和 value，则使用默认值（隐式）。但是建议使用显式插入默认值。便于识别。
      * 10.如果某列没有设定默认值，则插入的时候省略该列，则会插入 NULL。如果省略的列是 NOT NULL，则会报错
-     * 11.INSERT 语句的 SELECT 语句中，可以使用 WHERE 子句或者 GROUP BY 子句等任何SQL语法（但使用 ORDER BY 子句并不会产生任何效果）
+     * 11.INSERT 语句的 SELECT 语句中，可以使用 WHERE 子句或者 GROUP BY 子句等任何 SQ L语法（但使用 ORDER BY 子句并不会产生任何效果）
      */
     // INSERT INTO product (name,type,price) VALUES ('商品','衣服','130')
     // INSERT INTO product VALUES ('商品1','衣服','130')，('商品2','衣服','130')，('商品'3,'衣服','130') 多行插入也是大部分DBMS支持的，但是该写法不容易排错
@@ -182,7 +182,7 @@ class RoomActivity : BaseEntranceActivity() {
      * 7.如果不是自动提交（使用事务），即使使用 DELETE 语句删除了数据表，也可以通过 ROLLBACK 命令取消该事务的处理，恢复表中的数据
      */
     /*
-    //开始和提交事务的语句根据各DB平台不同
+    // 开始和提交事务的语句根据各DB平台不同
     BEGIN TRANSACTION;
     -- 将运动衬衫的单价降低10元
     UPDATE product SET price = price - 10 WHERE type = '运动衬衫';
@@ -216,7 +216,7 @@ class RoomActivity : BaseEntranceActivity() {
      */
     // CREATE VIEW productSum(type,cnt) AS SELECT type,COUNT(*) FROM GROUP BY type // 创建productSum视图。这里的AS并不是别名，只是语法规定
     // DROP VIEW productSum  删除productSum视图。
-    // DROP VIEW productSum CASCADE  删除productSum并删除其关联的视图。
+    // DROP VIEW productSum CASCADE  删除 productSum 并删除其关联的视图。
     // SELECT type，cnt FROM productSum   从视图中查询type和cnt
 
     /**
@@ -269,7 +269,7 @@ class RoomActivity : BaseEntranceActivity() {
     // SELECT str LENGTH(str) AS str_length FROM product  字符串长度。不同DBMS计算的单位不一样
     // SELECT str LOWER(str) AS str_lower FROM product  字符串小写
     // SELECT str UPPER(str) AS str_lower FROM product  字符串大写
-    // SELECT name，str1,str2 REPLACE(name，str1,str2) AS str_replace FROM product  str1:目标字符串；str2：需要替换成的字符串
+    // SELECT name,str1,str2 REPLACE(name，str1,str2) AS str_replace FROM product  str1:目标字符串；str2：需要替换成的字符串
     // SELECT str1 SUBSTRING(str FROM 3 FOR 2) AS str_sub FROM product  从第三个字符开始，截取其后的两个字符（包含自身）
     // SELECT CURRENT_DATE 查询日期，什么时候查询就返回什么日期
     // SELECT CURRENT_TIME 查询时间，什么时候查询就返回什么时间
@@ -290,16 +290,16 @@ class RoomActivity : BaseEntranceActivity() {
     /**
      * 谓词
      * 1.谓词就是返回值为真值的函数
-     * 2.BETWEEN包含三个参数
-     * 3.想要取得NULL数据时必须使用IS NULL
-     * 4.可以将子查询作为IN和EXISTS的参数
+     * 2.BETWEEN 包含三个参数
+     * 3.想要取得 NULL 数据时必须使用 IS NULL
+     * 4.可以将子查询作为 IN 和 EXISTS 的参数
      * 5.对通常的函数来说，返回值有可能是数字、字符串或者日期等，但是谓词的返回值全都是真值（TRUE/FALSE/UNKNOWN）
      * 6.%是代表“0字符以上的任意字符串”的特殊符号
      * 7._代表任意一个字符
-     * 8.为了选取出某些值为NULL的列的数据，不能使用=，而只能使用特定的谓词IS NULL
-     * 9.LIKE谓词——字符串的部分一致查询
-     * 10.BETWEEN谓词——范围查询
-     * 11.IN谓词——OR的简便用法
+     * 8.为了选取出某些值为 NULL 的列的数据，不能使用=，而只能使用特定的谓词 IS NULL
+     * 9.LIKE 谓词——字符串的部分一致查询
+     * 10.BETWEEN 谓词——范围查询
+     * 11.IN 谓词 —— OR 的简便用法
      */
 
     //  SELECT name FROM product LIKE 'ddd%'   以ddd开头的所有字符串
@@ -311,7 +311,7 @@ class RoomActivity : BaseEntranceActivity() {
     //  SELECT name FROM product WHERE price = 200 OR price = 300 OR price = 600  价格为200/300/600的商品名称
     //  SELECT name FROM product WHERE price IN (200,300,600)  价格为200/300/600的商品名称
     /*
-      -- 从product表中查询出product_id存在于子查询的name/price
+      -- 从 product 表中查询出 product_id 存在于子查询的 name/price
       SELECT name,price
       FROM product
       WHERE product_id IN(
@@ -321,7 +321,7 @@ class RoomActivity : BaseEntranceActivity() {
       )
      */
     /*
-      -- 从product表中查询出product_id不存在于子查询的name/price
+      -- 从 product 表中查询出 product_id 不存在于子查询的 name/price
       SELECT name,price
       FROM product
       WHERE product_id NOT IN(
@@ -331,7 +331,7 @@ class RoomActivity : BaseEntranceActivity() {
       )
      */
     /*
-      -- 查询是否存在product表是否存在于子查询
+      -- 查询是否存在 product 表是否存在于子查询
       SELECT * FROM product AS P
       WHERE EXISTS(
       SELECT * FROM shop AS SP
@@ -341,7 +341,7 @@ class RoomActivity : BaseEntranceActivity() {
       )
      */
     /*
-      -- 查询是否不存在product表是否不存在于子查询
+      -- 查询是否不存在 product 表是否不存在于子查询
       SELECT * FROM product AS P
       WHERE NOT EXISTS(
       SELECT * FROM shop AS SP
@@ -352,16 +352,16 @@ class RoomActivity : BaseEntranceActivity() {
      */
 
     /**
-     * CASE表达式
-     * 1.CASE表达式分为简单CASE表达式和搜索CASE表达式两种。搜索CASE表达式包含简单CASE表达式的全部功能
-     * 2.虽然CASE表达式中的ELSE子句可以省略，但为了让SQL语句更加容易理解，建议不要省略
-     * 3.CASE表达式中的END不能省略
-     * 4.使用CASE表达式能够将SELECT语句的结果进行组合
-     * 5.虽然有些DBMS提供了各自特有的CASE表达式的简化函数，例如Oracle中的DECODE和MySQL中的IF，等等，但由于它们并非通用的函数，
+     * CASE 表达式
+     * 1.CASE 表达式分为简单 CASE 表达式和搜索 CASE 表达式两种。搜索 CASE 表达式包含简单 CASE 表达式的全部功能
+     * 2.虽然 CASE 表达式中的 ELSE 子句可以省略，但为了让 SQL 语句更加容易理解，建议不要省略
+     * 3.CASE 表达式中的 END 不能省略
+     * 4.使用CASE表达式能够将 SELECT 语句的结果进行组合
+     * 5.虽然有些DBMS提供了各自特有的 CASE 表达式的简化函数，例如 Oracle 中的 DECODE 和 MySQL 中的 IF，等等，但由于它们并非通用的函数，
      *   功能上也有些限制，因此有些场合无法使用
      */
     /*
-       -- 从product表中查询出三种类型的商品，并在类型前拼接相应的字母，以new_product_type返回
+       -- 从 product 表中查询出三种类型的商品，并在类型前拼接相应的字母，以 new_product_type 返回
        SELECT name,
        CASE WHEN type = '衣服' THEN 'A:' || type
        CASE WHEN type = '鞋子' THEN 'B:' || type
@@ -394,36 +394,36 @@ class RoomActivity : BaseEntranceActivity() {
      * 表的加减法
      * 1.集合运算符会除去重复的记录
      * 2.作为运算对象的记录中列的类型、列数必须一致
-     * 3.可以使用任何SELECT语句，但ORDER BY子句只能在最后使用一次
+     * 3.可以使用任何 SELECT 语句，但 ORDER BY 子句只能在最后使用一次
      * 4.在集合运算符中使用ALL选项，可以保留重复行
      */
     /*
-       -- 查询两个表的name的合集
+       -- 查询两个表的 name 的合集
        SELECT name FROM product
        UNION
        SELECT name FROM product2
      */
     /*
-       -- 查询两个表的name,type,price的合集,且以type排序
+       -- 查询两个表的 name,type,price 的合集,且以 type 排序
        SELECT name,type,price FROM product
        UNION
        SELECT name,type,price FROM product2
        ORDER BY type
     */
     /*
-       -- 查询两个表的name的合集，包含重复行
+       -- 查询两个表的 name 的合集，包含重复行
        SELECT name FROM product
        UNION ALL
        SELECT name FROM product2
      */
     /*
-       -- 查询两个表的name的交集
+       -- 查询两个表的 name 的交集
        SELECT name FROM product
        INTERSECT
        SELECT name FROM product2
      */
     /*
-       -- 查询product表中减去存在product2表的name
+       -- 查询product表中减去存在 product2 表的name
        SELECT name FROM product
        EXCEPT
        SELECT name FROM product2
@@ -434,12 +434,12 @@ class RoomActivity : BaseEntranceActivity() {
      * 联结
      * 1.联结（JOIN）就是将其他表中的列添加过来，进行“添加列”的集合运算。UNION是以行（纵向）为单位进行操作，而联结则是以列（横向）为单位进行的
      * 2.联结大体上分为内联结和外联结两种。首先请大家牢牢掌握这两种联结的使用方法
-     * 3.进行联结时需要在FROM子句中使用多张表
-     * 4.进行内联结时必须使用ON子句，并且要书写在FROM和WHERE之间，WHERE可以不用
-     * 5.使用联结时SELECT子句中的列需要按照“<表的别名>.<列名>”的格式进行书写
-     * 6.内联结只会查询出两表（多表）共同的key，外联结会查询出两表（多表）所有的key
-     * 7.外联结还有一点非常重要，那就是要把哪张表作为主表。最终的结果中会包含主表内所有的数据。指定主表的关键字是LEFT和RIGHT
-     * 8.外联结中使用LEFT、RIGHT来指定主表。使用二者所得到的结果完全相同
+     * 3.进行联结时需要在 FROM 子句中使用多张表
+     * 4.进行内联结时必须使用 ON 子句，并且要书写在 FROM 和 WHERE 之间，WHERE 可以不用
+     * 5.使用联结时 SELECT 子句中的列需要按照“<表的别名>.<列名>”的格式进行书写
+     * 6.内联结只会查询出两表（多表）共同的 key，外联结会查询出两表（多表）所有的 key
+     * 7.外联结还有一点非常重要，那就是要把哪张表作为主表。最终的结果中会包含主表内所有的数据。指定主表的关键字是 LEFT 和 RIGHT
+     * 8.外联结中使用 LEFT、RIGHT 来指定主表。使用二者所得到的结果完全相同
      */
 
     /*
@@ -452,7 +452,7 @@ class RoomActivity : BaseEntranceActivity() {
       SP.product_id = P.product_id
      */
     /*
-      -- 联合查询两个表的不同信息，且商店id为'商店A'
+      -- 联合查询两个表的不同信息，且商店 id 为'商店A'
       SELECT SP.shop_id,SP.shop_name,P.product_product_id,P.product_name,P.price
       FROM shopProduct AS SP
       INNER JOIN
@@ -462,7 +462,7 @@ class RoomActivity : BaseEntranceActivity() {
       WHERE SP.shop_id = '商店A'
      */
     /*
-       -- 与上一条语句效果相同，这里只是多了LEFT关键字
+       -- 与上一条语句效果相同，这里只是多了 LEFT 关键字
        SELECT SP.shop_id,SP.shop_name,P.product_product_id,P.product_name,P.price
        FROM shopProduct AS SP
        LEFT INNER JOIN
@@ -472,7 +472,7 @@ class RoomActivity : BaseEntranceActivity() {
        WHERE SP.shop_id = '商店A'
       */
      /*
-       -- 查询两表的所有SELECT中的key，不管某个表是否存在该key（只要其中一个表存在，即会查出该行）
+       -- 查询两表的所有 SELECT 中的 key，不管某个表是否存在该 key（只要其中一个表存在，即会查出该行）
        SELECT SP.shop_id,SP.shop_name,P.product_product_id,P.product_name,P.price
        FROM shopProduct AS SP
        OUTER JOIN
@@ -512,49 +512,49 @@ class RoomActivity : BaseEntranceActivity() {
      * 窗口函数
      * 1.窗口函数可以进行排序、生成序列号等一般的聚合函数无法实现的高级操作
      * 2.能够作为窗口函数的聚合函数（SUM、AVG、COUNT、MAX、MIN）
-     * 3.RANK、DENSE_RANK、ROW_NUMBER等专用窗口函数
-     * 4.通过PARTITION BY分组后的记录集合称为窗口
-     * 5.RANK计算排序时，如果存在相同位次的记录，则会跳过之后的位次。比如前三记录一致时：1位、1位、1位、4位……
-     * 6.DENSE_RANK计算排序时，如果存在相同位次的记录，则不会跳过之后的位次。比如前三记录一致时：1位、1位、1位、2位……
-     * 7.ROW_NUMBER计算排序时，赋以唯一位次。比如前三记录一致时：1位、2位、3位、4位……
+     * 3.RANK、DENSE_RANK、ROW_NUMBER 等专用窗口函数
+     * 4.通过 PARTITION BY 分组后的记录集合称为窗口
+     * 5.RANK 计算排序时，如果存在相同位次的记录，则会跳过之后的位次。比如前三记录一致时：1位、1位、1位、4位……
+     * 6.DENSE_RANK 计算排序时，如果存在相同位次的记录，则不会跳过之后的位次。比如前三记录一致时：1位、1位、1位、2位……
+     * 7.ROW_NUMBER 计算排序时，赋以唯一位次。比如前三记录一致时：1位、2位、3位、4位……
      * 8.由于专用窗口函数无需参数，因此通常括号中都是空的
-     * 9.原则上窗口函数只能在SELECT子句中使用
+     * 9.原则上窗口函数只能在 SELECT 子句中使用
      *
      */
     /*
        -- 根据不同的商品种类，按照销售单价从低到高的顺序创建排序表
        -- PARTITION BY 能够设定排序的对象范围
-       -- PARTITION BY 在横向上对表进行分组，而ORDER BY决定了纵向排序的规则
-       -- 也就是先把type进行分类，然后再在type组内进行价格排序
+       -- PARTITION BY 在横向上对表进行分组，而 ORDER BY 决定了纵向排序的规则
+       -- 也就是先把 type 进行分类，然后再在 type 组内进行价格排序
        SELECT name,type,price,
        RANK () OVER (PARTITION BY type ORDER BY price)
        AS ranking
        FROM product
      */
     /*
-      -- 以id排序并计算总价sum
+      -- 以 id 排序并计算总价 sum
       SELECT name,type,price,
       SUM(price) OVER(ORDER BY id) AS sum
       FROM product
      */
     /*
-      -- 查询某一行+其前两行的平均值作为avg
+      -- 查询某一行+其前两行的平均值作为 avg
       SELECT name,type,price,
       AVG(price) OVER(ORDER BY id ROW 2 PRECEDING) AS avg
       FROM product
      */
     /*
-      -- 查询某一行+其后两行的平均值作为avg
+      -- 查询某一行+其后两行的平均值作为 avg
       SELECT name,type,price,
       AVG(price) OVER(ORDER BY id ROW 2 FOLLOWING) AS avg
       FROM product
      */
 
     /**
-     * GROUPING运算符
-     * 1.只使用GROUP BY子句和聚合函数是无法同时得出小计和合计的。如果想要同时得到，可以使用GROUPING运算符
-     * 2.虽然GROUPING运算符是标准SQL的功能，但还是有些DBMS尚未支持这一功能
-     * 3.ROLLUP可以同时得出合计和小计，是非常方便的工具
+     * GROUPING 运算符
+     * 1.只使用 GROUP BY 子句和聚合函数是无法同时得出小计和合计的。如果想要同时得到，可以使用 GROUPING 运算符
+     * 2.虽然 GROUPING 运算符是标准 SQL 的功能，但还是有些 DBMS 尚未支持这一功能
+     * 3.ROLLUP 可以同时得出合计和小计，是非常方便的工具
      */
     /*
       -- 查询多一行"合计"
@@ -566,25 +566,25 @@ class RoomActivity : BaseEntranceActivity() {
       ORDER BY type
      */
     /*
-      -- 这句的效果与上句基本相同，只是sum有值，其对应的type无值（因为合并后不知道是什么类型）
+      -- 这句的效果与上句基本相同，只是 sum 有值，其对应的 type 无值（因为合并后不知道是什么类型）
       SELECT type,SUM(price) AS sum
       FROM product GROUPING BY ROLLUP(type)
      */
     /*
-      -- 这句会计算每个type的price汇总（这里的sum有对应的type，因为同种类型合起来，还是同种类型）、所有type加起来的汇总（这汇总没有对应的type）。
+      -- 这句会计算每个 type 的 price 汇总（这里的 sum 有对应的 type，因为同种类型合起来，还是同种类型）、所有 type 加起来的汇总（这汇总没有对应的 type）。
       SELECT type,SUM(price) AS sum
       FROM product GROUP BY ROLLUP(type，date)
      */
     /*
-      -- 查询出因为ROLLUP产生的NULL 则返回对应的value为1
+      -- 查询出因为 ROLLUP 产生的 NULL 则返回对应的 value 为1
       SELECT GROUPING(type),AS type,GROUPING(price) AS price,GROUPING(date) AS date
       FROM product
       GROUP BY ROLLUP(type,date)
      */
     /*
-     -- 因为ROLLUP产生的NULL 则填充某些value
-     -- 把ROLLUP改为CUBE 则会多出以date作为value（对应的type的value是'商品种类 合计'）的几行
-     -- 把ROLLUP改为GROUPING SET ，结果是本来的type/date 行数加上以date作为value（对应的type的value是'商品种类 合计'）的几行
+     -- 因为 ROLLUP 产生的 NULL 则填充某些v alue
+     -- 把 ROLLUP 改为CUBE 则会多出以 date 作为 value（对应的 type 的 value 是'商品种类 合计'）的几行
+     -- 把 ROLLUP 改为 GROUPING SET ，结果是本来的 type/date 行数加上以 date 作为 value（对应的 type 的 value 是'商品种类 合计'）的几行
      SELECT CASE WHEN GROUPING(type) = 1 THEN '商品种类 合计' ELSE type END AS type
             CASE WHEN GROUPING(date) = 1 THEN '等级日期 合计' ELSE date END AS date
      SUM(price) AS price

@@ -53,7 +53,7 @@ class FlowActivity : BaseEntranceActivity() {
             }
         }
 
-        // transform操作符
+        // transform 操作符
         addButton("transform") {
             lifecycleScope.launch {
                 (1..5).asFlow()
@@ -133,8 +133,8 @@ class FlowActivity : BaseEntranceActivity() {
             }
         }
 
-        // flowOn这种可以改变flow的上下文
-        // flowOn只影响它之前的操作，不影响collect（这里的collect在主线程）
+        // flowOn 这种可以改变 flow 的上下文
+        // flowOn 只影响它之前的操作，不影响 collect（这里的 collect 在主线程）
         addButton("主线程中调用Dispatchers.Default的flow flowOn") {
             lifecycleScope.launch(Dispatchers.Main) {
                 (1..5).asFlow()
@@ -187,8 +187,8 @@ class FlowActivity : BaseEntranceActivity() {
             }
         }
 
-        // zip  合并了两个flow 输出个数以两个之中size小的为准
-        // 如果flow有delay 则会等待delay完成后再合并输出
+        // zip 合并了两个 flow 输出个数以两个之中 size 小的为准
+        // 如果 flow 有 delay 则会等待delay完成后再合并输出
         addButton("zip") {
             lifecycleScope.launch(Dispatchers.Main) {
                 val nums = (1..5).asFlow()

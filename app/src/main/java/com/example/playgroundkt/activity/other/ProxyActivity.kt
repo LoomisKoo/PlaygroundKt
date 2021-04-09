@@ -8,6 +8,11 @@ import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
 
+/**
+ * 动态代理详解：
+ * https://blog.csdn.net/qq_32625839/article/details/81911029
+ * https://blog.51cto.com/hongyanwb/625272
+ */
 @Route(path = RouterPath.ProxyActivity)
 class ProxyActivity : BaseEntranceActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,15 +27,15 @@ class ProxyActivity : BaseEntranceActivity() {
             val proxyHandler = HelloProxyInvocationHandler(DynamicHelloService())
             val proxy = Proxy.newProxyInstance(
                 DynamicHelloService::class.java.classLoader,
-                arrayOf(IDynamicHelloService::class.java, IDynamicHelloService2::class.java),
+//                arrayOf(IDynamicHelloService::class.java, IDynamicHelloService2::class.java),
+                // 这里和上面注释的一句同样效果
+                DynamicHelloService::class.java.interfaces,
                 proxyHandler
             )
 
+
             (proxy as IDynamicHelloService).getDynamicContent("我是动态代理1")
             (proxy as IDynamicHelloService2).getDynamicContent2("我是动态代理2")
-
-            println("")
-//            proxy.getDynamicContent("我是动态代理")
         }
     }
 

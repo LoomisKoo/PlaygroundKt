@@ -24,8 +24,8 @@ import java.lang.Exception
  */
 
 /**
- * 该activity测试的功能如下
- * 1.GlobalScope和lifecycleScope启动协程的区别（是否具有生命周期感知）
+ * 该 activity 测试的功能如下
+ * 1.GlobalScope 和 lifecycleScope 启动协程的区别（是否具有生命周期感知）
  * 2.协程串行、并发、同步
  * 3.协程正常取消、退出
  * 4.协程种的异常传递、捕获机制
@@ -104,8 +104,8 @@ class LaunchTypeActivity : BaseEntranceActivity() {
     }
 
     /**
-     * GlobalScope方式启动协程
-     * 这种方式的生命周期的process的 不推荐使用
+     * GlobalScope 方式启动协程
+     * 这种方式的生命周期的 process 的 不推荐使用
      */
     private fun globalScope() {
         globalJob = GlobalScope.launch {
@@ -117,7 +117,7 @@ class LaunchTypeActivity : BaseEntranceActivity() {
     }
 
     /**
-     * lifecycleScope方式启动协程
+     * lifecycleScope 方式启动协程
      * 这种方式的生命周期与activity或fragment绑定 推荐使用
      */
     private fun lifecycleScope() {
@@ -130,8 +130,8 @@ class LaunchTypeActivity : BaseEntranceActivity() {
     }
 
     /**
-     * lifecycleScope方式启动协程
-     * 这种方式的生命周期与activity或fragment绑定 推荐使用
+     * lifecycleScope 方式启动协程
+     * 这种方式的生命周期与 activity 或 fragment 绑定 推荐使用
      */
     private fun lifecycleScopeWithTimeout() {
         lifecycleScope.launchWhenResumed {

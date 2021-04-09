@@ -12,8 +12,8 @@ import com.example.playgroundkt.util.BindFieldViewUtil
 
 /**
  * @see ../doc/javaPoet.md
- * JavaPoet  用于动态生成java文件（简单仿照butterknife）
- * JavaPoet是一款可以自动生成Java文件的第三方依赖
+ * JavaPoet 用于动态生成java文件（简单仿照 butterknife）
+ * JavaPoet 是一款可以自动生成Java文件的第三方依赖
  * 简洁易懂的API，上手快
  * 让繁杂、重复的Java文件，自动化生成，提高工作效率，简化流程
  */
