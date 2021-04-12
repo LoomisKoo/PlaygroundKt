@@ -8,7 +8,7 @@ import com.example.playgroundkt.activity.BaseEntranceActivity
 import java.util.*
 
 /**
- * @see ISP.md
+ * @see SPI.md
  */
 @Route(path = RouterPath.IspActivity)
 class SpiActivity : BaseEntranceActivity() {

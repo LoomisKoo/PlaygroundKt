@@ -1,5 +1,7 @@
 package com.example.jetpackmvvm.base.activity
 
+import android.app.Activity
+import android.app.AppDetailsActivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer

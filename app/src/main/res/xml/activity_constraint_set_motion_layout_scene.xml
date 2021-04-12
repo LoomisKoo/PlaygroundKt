@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@id/a_login_end"
+        app:constraintSetStart="@id/a_login_start"
+        app:duration="500"
+        app:motionInterpolator="easeIn">
+        <OnClick
+            app:clickAction="toggle"
+            app:targetId="@id/btn_login" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/a_login_start">
+        <Constraint
+            android:id="@id/imageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="50dp"
+            android:scaleX="1"
+            android:scaleY="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint android:id="@+id/btn_login">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="60dp"
+                app:layout_constraintTop_toBottomOf="@id/et_password" />
+            <CustomAttribute
+                motion:attributeName="backgroundColor"
+                motion:customColorValue="#00ff00" />
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="#ff0000" />
+        </Constraint>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/a_login_end">
+        <Constraint
+            android:id="@id/imageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="50dp"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </Constraint>
+        <Constraint
+            android:id="@+id/btn_login"
+            android:alpha="0.5">
+            <Layout
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="25dp"
+                app:layout_constraintEnd_toEndOf="@+id/et_account"
+                app:layout_constraintStart_toStartOf="@+id/et_account"
+                app:layout_constraintTop_toBottomOf="@id/et_password" />
+
+            <!--      自定义需要改变的属性,attributeName取自view原有的属性      -->
+            <CustomAttribute
+                motion:attributeName="backgroundColor"
+                motion:customColorValue="#ff0000" />
+
+            <CustomAttribute
+                motion:attributeName="textColor"
+                motion:customColorValue="#00ff00" />
+        </Constraint>
+    </ConstraintSet>
+
+</MotionScene>

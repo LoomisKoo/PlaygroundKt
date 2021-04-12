@@ -14,7 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlaygroundKt">
-        <activity android:name=".activity.other.HookActivity"></activity>
+        <activity android:name=".activity.animation.OtherMotionActivity"></activity>
+        <activity android:name=".activity.animation.MotionYoutubeActivity" />
+        <activity android:name=".activity.animation.ConstraintSetMotionLayoutActivity" />
+        <activity android:name=".activity.animation.AnimationListActivity" />
+        <activity android:name=".activity.animation.TranslateMotionLayoutActivity" />
+        <activity android:name=".activity.other.HookActivity" />
         <activity android:name=".activity.other.SpiActivity" />
         <activity android:name=".activity.other.APTActivity" />
         <activity android:name=".activity.other.AnnotationActivity" />
