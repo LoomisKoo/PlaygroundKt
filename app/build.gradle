@@ -103,4 +103,6 @@ dependencies {
 //    // optional - Kotlin Extensions and Coroutines support for Room
 //    implementation "androidx.room:room-ktx:2.1.1"
 
+    implementation 'com.github.mmin18:realtimeblurview:1.2.1'
+
 }

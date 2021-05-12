@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PlaygroundKt">
-        <activity android:name=".activity.animation.OtherMotionActivity"></activity>
+        <activity android:name=".activity.behavior.BottomSheetBehaviorActivity"></activity>
+        <activity android:name=".activity.behavior.BehaviorListActivity" />
+        <activity android:name=".activity.animation.OtherMotionActivity" />
         <activity android:name=".activity.animation.MotionYoutubeActivity" />
         <activity android:name=".activity.animation.ConstraintSetMotionLayoutActivity" />
         <activity android:name=".activity.animation.AnimationListActivity" />

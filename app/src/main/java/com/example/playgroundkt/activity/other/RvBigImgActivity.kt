@@ -1,7 +1,9 @@
 package com.example.playgroundkt.activity.other
 
+import android.graphics.Outline
 import android.os.Bundle
 import android.view.View
+import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +27,7 @@ class RvBigImgActivity : BaseEntranceActivity() {
         super.onCreate(savedInstanceState)
         val rv = RecyclerView(this)
         rv.layoutManager = LinearLayoutManager(this)
+
         val adapter = Adapter()
 
         for (i in 0..30) {
@@ -65,7 +68,7 @@ class RvBigImgActivity : BaseEntranceActivity() {
     /**
      * 最多保存3个imageview的实例（LRU算法）
      */
-    val mImageMap = MaxHashMap<Int, ScrollImageView>(3)
+    val mImageMap = MaxHashMap<Int, ScrollImageView>(5)
 
     inner class Adapter : BaseQuickAdapter<Data, BaseViewHolder>(R.layout.item_big_img) {
         override fun convert(holder: BaseViewHolder, item: Data) {

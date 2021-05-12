@@ -1,10 +1,15 @@
 package com.example.playgroundkt.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doBeforeTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager

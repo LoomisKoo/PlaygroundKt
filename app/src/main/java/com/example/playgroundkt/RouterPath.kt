@@ -16,6 +16,8 @@ package com.example.playgroundkt
 class RouterPath {
     companion object {
         // 常量命名与页面一致，方便开发
+        const val BottomSheetBehaviorActivity = "/function/BottomSheetBehaviorActivity"
+        const val BehaviorListActivity = "/function/BehaviorListActivity"
         const val OtherMotionActivity = "/function/OtherMotionActivity"
         const val MotionYoutubeActivity = "/function/MotionYoutubeActivity"
         const val ConstraintSetMotionLayoutActivity = "/function/ConstraintSetMotionLayoutActivity"
