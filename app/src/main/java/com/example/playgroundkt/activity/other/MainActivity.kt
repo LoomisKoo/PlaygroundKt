@@ -62,6 +62,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     private fun initRecyclerView() {
         val entranceList = ArrayList<HomePageData>()
+        entranceList.add(HomePageData("OutlineProvider", RouterPath.OutlineProviderActivity))
         entranceList.add(HomePageData("behavior", RouterPath.BehaviorListActivity))
         entranceList.add(HomePageData("animationList", RouterPath.AnimationListActivity))
         entranceList.add(HomePageData("hook", RouterPath.HookActivity))
